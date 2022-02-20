@@ -1,5 +1,8 @@
 #include "game.hpp"
 
+SDL_Texture *playerTexture;
+SDL_Rect srcRectagle, dstRectangle;
+
 Game::Game()
 {
 }
@@ -32,6 +35,10 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
   }
 
   isRunning = true;
+
+  SDL_Surface *playerSurface = IMG_Load("assets/player_sprite.png");
+  playerTexture = SDL_CreateTextureFromSurface(renderer, playerSurface);
+  SDL_FreeSurface(playerSurface);
 }
 
 void Game::handleEvents()
@@ -60,12 +67,18 @@ void Game::handleEvents()
 
 void Game::update()
 {
+  dstRectangle.h = 64;
+  dstRectangle.w = 64;
+
+  counter++;
+  dstRectangle.x = counter;
 }
 
 void Game::render()
 {
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderCopy(renderer, playerTexture, NULL, &dstRectangle);
   SDL_RenderPresent(renderer);
 }
 

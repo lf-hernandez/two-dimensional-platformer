@@ -1,8 +1,9 @@
 #ifndef game_hpp
 #define game_hpp
 
-#include <SDL2/SDL.h>
 #include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 class Game
 {
@@ -18,6 +19,7 @@ public:
 
 private:
   bool isRunning;
+  int counter;
   SDL_Window *window;
   SDL_Renderer *renderer;
 };
