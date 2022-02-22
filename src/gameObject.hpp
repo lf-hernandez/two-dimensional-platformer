@@ -1,10 +1,11 @@
 #pragma once
+
 #include "game.hpp"
 
 class GameObject
 {
 public:
-    GameObject(const char *textureSheet, SDL_Renderer *gameRenderer, int x, int y);
+    GameObject(const char *textureSheet, int x, int y);
     ~GameObject();
 
     void update();
@@ -16,5 +17,4 @@ private:
 
     SDL_Texture *objectTexture;
     SDL_Rect srcRectangle, destRectangle;
-    SDL_Renderer *renderer;
 };
