@@ -1,8 +1,8 @@
 #include "game.hpp"
 #include "textureManager.hpp"
+#include "gameObject.hpp"
 
-SDL_Texture *playerTexture;
-SDL_Rect srcRectagle, dstRectangle;
+GameObject* player;
 
 Game::Game()
 {
@@ -37,7 +37,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
 
   isRunning = true;
 
-  playerTexture = TextureManager::LoadTexture("assets/player_sprite.png", renderer);
+  player = new GameObject("assets/player_sprite.png", renderer, 0, 0);
 }
 
 void Game::handleEvents()
@@ -66,30 +66,26 @@ void Game::handleEvents()
 
 void Game::update()
 {
-  dstRectangle.h = 64;
-  dstRectangle.w = 64;
-
-  counter++;
-  dstRectangle.x = counter;
+  player -> update();
 }
 
 void Game::render()
 {
-  SDL_RenderClear(renderer);
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_RenderCopy(renderer, playerTexture, NULL, &dstRectangle);
-  SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    player -> render();
+    SDL_RenderPresent(renderer);
 }
 
 void Game::clean()
 {
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
-  std::cout << "Destroyed window, renderering context, and cleaned up all intialized SDL subsystems" << std::endl;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    std::cout << "Destroyed window, renderering context, and cleaned up all intialized SDL subsystems" << std::endl;
 }
 
 bool Game::getIsRunning()
 {
-  return isRunning;
+    return isRunning;
 }

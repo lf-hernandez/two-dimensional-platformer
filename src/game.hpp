@@ -7,18 +7,18 @@
 class Game
 {
 public:
-  Game();
-  ~Game();
-  void init(const char *title, int xPos, int yPos, int width, int height, Uint32 flags);
-  void handleEvents();
-  void update();
-  void render();
-  void clean();
-  bool getIsRunning();
+    Game();
+    ~Game();
+    void init(const char *title, int xPos, int yPos, int width, int height, Uint32 flags);
+    void handleEvents();
+    void update();
+    void render();
+    void clean();
+    bool getIsRunning();
 
 private:
-  bool isRunning;
-  int counter;
-  SDL_Window *window;
-  SDL_Renderer *renderer;
+    bool isRunning;
+    int counter;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
 };
