@@ -1,8 +1,10 @@
 #include "game.hpp"
 #include "textureManager.hpp"
 #include "gameObject.hpp"
+#include "map.hpp"
 
 GameObject* player;
+Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -40,6 +42,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
   isRunning = true;
 
   player = new GameObject("assets/player_sprite.png", 0, 0);
+  map = new Map();
 }
 
 void Game::handleEvents()
@@ -75,6 +78,7 @@ void Game::render()
 {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    map -> DrawMap();
     player -> render();
     SDL_RenderPresent(renderer);
 }
