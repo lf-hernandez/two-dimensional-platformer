@@ -2,7 +2,10 @@
   "files.associations": {
     "ostream": "cpp",
     "ios": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "locale": "cpp",
+    "__split_buffer": "cpp",
+    "vector": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled"
 }
