@@ -21,7 +21,7 @@ inline ComponentID getComponentTypeID()
 template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
     static ComponentID typeID = getComponentTypeID();
-    return typeID()
+    return typeID;
 }
 
 constexpr std::size_t maxComponents = 32;
@@ -71,7 +71,7 @@ public:
 
     template <typename T> bool hasComponent() const
     {
-        return componentBitSet[getComponentTypeID<T>]
+        return componentBitSet[getComponentTypeID<T>];
     }
 
     template <typename T, typename... TArgs>
@@ -83,7 +83,7 @@ public:
         components.emplace_back(std::move(uniquePointer));
 
         componentArray[getComponentTypeID<T>()] = component;
-        componentBitSet[getComponentTypeID<t>()] = true;
+        componentBitSet[getComponentTypeID<T>()] = true;
 
         component->init();
         return *component;
@@ -91,7 +91,7 @@ public:
 
     template<typename T> T& getComponent() const
     {
-        auto pointer(componentArray[getComponentTypeID<t>()]);
+        auto pointer(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(pointer);
     }
 };
