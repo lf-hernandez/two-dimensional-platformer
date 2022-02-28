@@ -21,6 +21,6 @@ public:
 
 private:
     bool isRunning;
-    int counter;
+    // int counter;
     SDL_Window *window;
 };

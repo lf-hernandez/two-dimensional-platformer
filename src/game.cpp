@@ -1,12 +1,17 @@
+#include "ecs/entityComponentSystem.hpp"
+#include "ecs/components/positionComponent.hpp"
 #include "game.hpp"
-#include "textureManager.hpp"
 #include "gameObject.hpp"
 #include "map.hpp"
+#include "textureManager.hpp"
 
 GameObject* player;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 Game::Game()
 {
@@ -43,6 +48,8 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
 
   player = new GameObject("assets/player_sprite.png", 0, 0);
   map = new Map();
+
+  newPlayer.addComponent<PositionComponent>();
 }
 
 void Game::handleEvents()
@@ -72,6 +79,8 @@ void Game::handleEvents()
 void Game::update()
 {
   player -> update();
+  manager.update();
+  std::cout << newPlayer.getComponent<PositionComponent>().getXPosition() << "," << newPlayer.getComponent<PositionComponent>().getYPosition() << std::endl;
 }
 
 void Game::render()
