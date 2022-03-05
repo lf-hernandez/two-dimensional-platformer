@@ -21,6 +21,5 @@ class Game {
 
  private:
   bool isRunning;
-  // int counter;
   SDL_Window *window;
 };

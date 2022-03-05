@@ -50,10 +50,11 @@ class Entity {
  public:
   void update() {
     for (auto& component : components) component->update();
-    for (auto& component : components) component->draw();
   }
 
-  void draw() {}
+  void draw() {
+    for (auto& component : components) component->draw();
+  }
 
   bool isActive() const { return active; }
 

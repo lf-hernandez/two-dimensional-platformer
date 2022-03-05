@@ -3,19 +3,21 @@
 
 class PositionComponent : public Component {
  private:
-  int xPosition{0};
-  int yPosition{0};
+  int xPosition;
+  int yPosition;
 
  public:
-  void init() override {
+  PositionComponent() {
     xPosition = 0;
     yPosition = 0;
   }
 
-  void update() override {
-    xPosition++;
-    yPosition++;
+  PositionComponent(int x, int y) {
+    xPosition = x;
+    yPosition = y;
   }
+
+  void update() override { xPosition++; }
 
   int getXPosition() { return xPosition; }
 
