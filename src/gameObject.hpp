@@ -2,19 +2,18 @@
 
 #include "game.hpp"
 
-class GameObject
-{
-public:
-    GameObject(const char *textureSheet, int x, int y);
-    ~GameObject();
+class GameObject {
+ public:
+  GameObject(const char *textureSheet, int x, int y);
+  ~GameObject();
 
-    void update();
-    void render();
+  void update();
+  void render();
 
-private:
-    int xPos;
-    int yPos;
+ private:
+  int xPos;
+  int yPos;
 
-    SDL_Texture *objectTexture;
-    SDL_Rect srcRectangle, destRectangle;
+  SDL_Texture *objectTexture;
+  SDL_Rect srcRectangle, destRectangle;
 };

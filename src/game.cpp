@@ -1,6 +1,7 @@
-#include "ecs/entityComponentSystem.hpp"
-#include "ecs/components/positionComponent.hpp"
 #include "game.hpp"
+
+#include "ecs/components/positionComponent.hpp"
+#include "ecs/entityComponentSystem.hpp"
 #include "gameObject.hpp"
 #include "map.hpp"
 #include "textureManager.hpp"
@@ -13,17 +14,12 @@ SDL_Renderer* Game::renderer = nullptr;
 Manager manager;
 auto& newPlayer(manager.addEntity());
 
-Game::Game()
-{
-}
-Game::~Game()
-{
-}
+Game::Game() {}
+Game::~Game() {}
 
-void Game::init(const char *title, int xPos, int yPos, int width, int height, Uint32 flags)
-{
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-  {
+void Game::init(const char* title, int xPos, int yPos, int width, int height,
+                Uint32 flags) {
+  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
     isRunning = false;
   }
@@ -32,15 +28,13 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
 
   window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
 
-  if (window)
-  {
+  if (window) {
     std::cout << "Window created" << std::endl;
   }
 
   renderer = SDL_CreateRenderer(window, -1, 0);
 
-  if (renderer)
-  {
+  if (renderer) {
     std::cout << "Renderer created" << std::endl;
   }
 
@@ -52,55 +46,49 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, Ui
   newPlayer.addComponent<PositionComponent>();
 }
 
-void Game::handleEvents()
-{
+void Game::handleEvents() {
   SDL_Event event;
-  while (SDL_PollEvent(&event))
-  {
-    switch (event.type)
-    {
-    case SDL_QUIT:
-      isRunning = false;
-      break;
-
-    case SDL_KEYDOWN:
-      if (event.key.keysym.sym == SDLK_ESCAPE)
-      {
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_QUIT:
         isRunning = false;
-      }
-      break;
+        break;
 
-    default:
-      break;
+      case SDL_KEYDOWN:
+        if (event.key.keysym.sym == SDLK_ESCAPE) {
+          isRunning = false;
+        }
+        break;
+
+      default:
+        break;
     }
   }
 }
 
-void Game::update()
-{
-  player -> update();
+void Game::update() {
+  player->update();
   manager.update();
-  std::cout << newPlayer.getComponent<PositionComponent>().getXPosition() << "," << newPlayer.getComponent<PositionComponent>().getYPosition() << std::endl;
+  std::cout << newPlayer.getComponent<PositionComponent>().getXPosition() << ","
+            << newPlayer.getComponent<PositionComponent>().getYPosition()
+            << std::endl;
 }
 
-void Game::render()
-{
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    map -> DrawMap();
-    player -> render();
-    SDL_RenderPresent(renderer);
+void Game::render() {
+  SDL_RenderClear(renderer);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  map->DrawMap();
+  player->render();
+  SDL_RenderPresent(renderer);
 }
 
-void Game::clean()
-{
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    std::cout << "Destroyed window, renderering context, and cleaned up all intialized SDL subsystems" << std::endl;
+void Game::clean() {
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
+  std::cout << "Destroyed window, renderering context, and cleaned up all "
+               "intialized SDL subsystems"
+            << std::endl;
 }
 
-bool Game::getIsRunning()
-{
-    return isRunning;
-}
+bool Game::getIsRunning() { return isRunning; }

@@ -2,22 +2,20 @@
 
 #include "game.hpp"
 
-class Map
-{
-public:
-    Map();
-    ~Map();
+class Map {
+ public:
+  Map();
+  ~Map();
 
-    void LoadMap(int matrix[20][25]);
-    void DrawMap();
+  void LoadMap(int matrix[20][25]);
+  void DrawMap();
 
-private:
-    SDL_Rect src, dest;
+ private:
+  SDL_Rect src, dest;
 
-    SDL_Texture* dirt;
-    SDL_Texture* grass;
-    SDL_Texture* sky;
+  SDL_Texture* dirt;
+  SDL_Texture* grass;
+  SDL_Texture* sky;
 
-    int map[20][25];
-
+  int map[20][25];
 };
