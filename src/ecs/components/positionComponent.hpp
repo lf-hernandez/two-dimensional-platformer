@@ -4,8 +4,8 @@
 class PositionComponent : public Component
 {
 private:
-    int xPosition = 0;
-    int yPosition = 0;
+    int xPosition {0};
+    int yPosition {0};
 
 public:
     void init() override

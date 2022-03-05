@@ -1,15 +1,15 @@
 #include "game.hpp"
 
-const char *WINDOW_TITLE = "Platformer";
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+const char *WINDOW_TITLE {"Platformer"};
+const int WINDOW_WIDTH {800};
+const int WINDOW_HEIGHT {600};
 
-Game *game = nullptr;
+Game *game {nullptr};
 
 int main(int argc, const char *argv[])
 {
-    const int fps = 60;
-    const int frameDelay = 1000 / fps;
+    const int fps {60};
+    const int frameDelay {1000 / fps};
 
     Uint32 frameStart;
     int frameTime;

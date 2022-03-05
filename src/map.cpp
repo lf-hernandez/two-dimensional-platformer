@@ -1,7 +1,7 @@
 #include "map.hpp"
 #include "textureManager.hpp"
 
-int level_1[20][25] = {
+int level_1[20][25] {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -46,9 +46,9 @@ Map::Map()
 
 void Map::LoadMap(int matrix[20][25])
 {
-    for(int row = 0; row < 20; row++)
+    for(int row {0}; row < 20; row++)
     {
-        for(int column = 0; column < 25; column ++)
+        for(int column {0}; column < 25; column ++)
         {
             map[row][column] = matrix[row][column];
         }
@@ -57,11 +57,11 @@ void Map::LoadMap(int matrix[20][25])
 
 void Map::DrawMap()
 {
-    int type = 0;
+    int type {0};
 
-    for(int row = 0; row < 20; row++)
+    for(int row {0}; row < 20; row++)
     {
-        for(int column = 0; column < 25; column ++)
+        for(int column {0}; column < 25; column ++)
         {
             type = map[row][column];
 

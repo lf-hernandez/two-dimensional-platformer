@@ -14,17 +14,17 @@ using ComponentID = std::size_t;
 
 inline ComponentID getComponentTypeID()
 {
-    static ComponentID lastID = 0;
+    static ComponentID lastID {0};
     return lastID++;
 }
 
 template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
-    static ComponentID typeID = getComponentTypeID();
+    static ComponentID typeID {getComponentTypeID()};
     return typeID;
 }
 
-constexpr std::size_t maxComponents = 32;
+constexpr std::size_t maxComponents {32};
 
 using ComponentBitSet = std::bitset<maxComponents>;
 using ComponentArray = std::array<Component*, maxComponents>;
@@ -44,7 +44,7 @@ public:
 class Entity
 {
 private:
-    bool active = true;
+    bool active {true};
     std::vector<std::unique_ptr<Component>> components;
 
     ComponentArray componentArray;
@@ -78,7 +78,9 @@ public:
     T& addComponent(TArgs&&... mArgs)
     {
         T* component(new T(std::forward<TArgs>(mArgs)...));
+
         component->entity = this;
+
         std::unique_ptr<Component> uniquePointer{component};
         components.emplace_back(std::move(uniquePointer));
 
@@ -86,6 +88,7 @@ public:
         componentBitSet[getComponentTypeID<T>()] = true;
 
         component->init();
+        
         return *component;
     }
 
@@ -129,7 +132,7 @@ public:
 
     Entity& addEntity()
     {
-        Entity* entity = new Entity();
+        Entity* entity {new Entity()};
         std::unique_ptr<Entity> uniquePointer { entity };
         entities.emplace_back(std::move(uniquePointer));
         return *entity;
