@@ -3,6 +3,7 @@
 #include "GameObject.hpp"
 #include "Map.hpp"
 #include "TextureManager.hpp"
+#include "Vector.hpp"
 #include "ecs/components.hpp"
 
 Map* map;
@@ -40,7 +41,7 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height,
 
   map = new Map();
 
-  player.addComponent<TransformComponent>(0, 485);
+  player.addComponent<TransformComponent>(0.0, 485.0);
   player.addComponent<SpriteComponent>("assets/player.png");
 }
 
@@ -67,6 +68,7 @@ void Game::handleEvents() {
 void Game::update() {
   manager.refresh();
   manager.update();
+  player.getComponent<TransformComponent>().position.add(Vector(5, 0));
 }
 
 void Game::render() {
