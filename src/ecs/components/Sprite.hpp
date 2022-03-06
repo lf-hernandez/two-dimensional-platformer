@@ -30,8 +30,8 @@ class SpriteComponent : public Component {
   }
 
   void update() override {
-    destRectange.x = (int)transform->position.x;
-    destRectange.y = (int)transform->position.y;
+    destRectange.x = static_cast<int>(transform->position.x);
+    destRectange.y = static_cast<int>(transform->position.y);
   }
 
   void draw() override {
