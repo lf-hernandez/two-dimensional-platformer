@@ -1,6 +1,6 @@
-#include "map.hpp"
+#include "Map.hpp"
 
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 
 int level_1[20][25]{
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

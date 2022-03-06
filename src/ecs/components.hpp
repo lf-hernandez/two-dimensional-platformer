@@ -1,5 +1,5 @@
 #pragma once
-#include "../textureManager.hpp"
-#include "components/position.hpp"
-#include "components/sprite.hpp"
-#include "entityComponentSystem.hpp"
+#include "../TextureManager.hpp"
+#include "EntityComponentSystem.hpp"
+#include "components/Sprite.hpp"
+#include "components/Transform.hpp"

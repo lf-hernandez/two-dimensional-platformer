@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "Game.hpp"
 
 const char *WINDOW_TITLE{"Platformer"};
 const int WINDOW_WIDTH{800};

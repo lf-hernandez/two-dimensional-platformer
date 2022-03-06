@@ -1,9 +1,9 @@
-#include "game.hpp"
+#include "Game.hpp"
 
+#include "GameObject.hpp"
+#include "Map.hpp"
+#include "TextureManager.hpp"
 #include "ecs/components.hpp"
-#include "gameObject.hpp"
-#include "map.hpp"
-#include "textureManager.hpp"
 
 Map* map;
 Manager manager;
@@ -40,7 +40,7 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height,
 
   map = new Map();
 
-  player.addComponent<PositionComponent>(0, 485);
+  player.addComponent<TransformComponent>(0, 485);
   player.addComponent<SpriteComponent>("assets/player.png");
 }
 
