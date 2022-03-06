@@ -1,6 +1,8 @@
 #pragma once
-#include "../components.hpp"
+#include "../../TextureManager.hpp"
+#include "../EntityComponentSystem.hpp"
 #include "SDL2/SDL.h"
+#include "Transform.hpp"
 
 class SpriteComponent : public Component {
  private:

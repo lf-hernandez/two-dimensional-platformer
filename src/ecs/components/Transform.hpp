@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Vector.hpp"
-#include "../components.hpp"
+#include "../EntityComponentSystem.hpp"
 
 class TransformComponent : public Component {
  public:
