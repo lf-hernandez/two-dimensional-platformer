@@ -6,17 +6,18 @@
 #include "Vector.hpp"
 #include "ecs/components.hpp"
 
-Map* map;
+Map *map;
 Manager manager;
 
-SDL_Renderer* Game::renderer = nullptr;
+SDL_Renderer *Game::renderer = nullptr;
+SDL_Event Game::event;
 
-auto& player(manager.addEntity());
+auto &player(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
 
-void Game::init(const char* title, int xPos, int yPos, int width, int height,
+void Game::init(const char *title, int xPos, int yPos, int width, int height,
                 Uint32 flags) {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
@@ -43,32 +44,31 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height,
 
   player.addComponent<TransformComponent>(0.0, 485.0);
   player.addComponent<SpriteComponent>("assets/player.png");
+  player.addComponent<KeyboardController>();
 }
 
 void Game::handleEvents() {
-  SDL_Event event;
-  while (SDL_PollEvent(&event)) {
-    switch (event.type) {
-      case SDL_QUIT:
+  SDL_PollEvent(&event);
+
+  switch (event.type) {
+    case SDL_QUIT:
+      isRunning = false;
+      break;
+
+    case SDL_KEYDOWN:
+      if (event.key.keysym.sym == SDLK_ESCAPE) {
         isRunning = false;
-        break;
+      }
+      break;
 
-      case SDL_KEYDOWN:
-        if (event.key.keysym.sym == SDLK_ESCAPE) {
-          isRunning = false;
-        }
-        break;
-
-      default:
-        break;
-    }
+    default:
+      break;
   }
 }
 
 void Game::update() {
   manager.refresh();
   manager.update();
-  player.getComponent<TransformComponent>().position.add(Vector(5, 0));
 }
 
 void Game::render() {
