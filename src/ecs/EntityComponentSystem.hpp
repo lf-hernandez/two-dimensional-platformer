@@ -18,7 +18,7 @@ inline ComponentID getComponentTypeID() {
 
 template <typename T>
 inline ComponentID getComponentTypeID() noexcept {
-  static ComponentID typeID{getComponentTypeID()};
+  static ComponentID typeID = getComponentTypeID();
   return typeID;
 }
 
@@ -61,7 +61,7 @@ class Entity {
 
   template <typename T>
   bool hasComponent() const {
-    return componentBitSet[getComponentTypeID<T>];
+    return componentBitSet[getComponentTypeID<T>()];
   }
 
   template <typename T, typename... TArgs>

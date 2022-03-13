@@ -5,6 +5,7 @@
 #include "TextureManager.hpp"
 #include "Vector.hpp"
 #include "ecs/components.hpp"
+#include "ecs/components/Collision.cpp"
 
 Map *map;
 Manager manager;
@@ -13,6 +14,7 @@ SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
 auto &player(manager.addEntity());
+auto &wall(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -42,9 +44,17 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height,
 
   map = new Map();
 
-  player.addComponent<TransformComponent>(0.0, 485.0);
+  player.addComponent<TransformComponent>(0.0, 485.0, 2);
   player.addComponent<SpriteComponent>("assets/player.png");
   player.addComponent<KeyboardController>();
+  player.addComponent<ColliderComponent>("player");
+
+  wall.addComponent<TransformComponent>(150.0, 512.0, 32, 32, 1);
+  wall.addComponent<SpriteComponent>("assets/wall.png");
+  wall.addComponent<ColliderComponent>("wall");
+  wall.addComponent<TransformComponent>(150.0, 485.0, 32, 32, 1);
+  wall.addComponent<SpriteComponent>("assets/wall.png");
+  wall.addComponent<ColliderComponent>("wall");
 }
 
 void Game::handleEvents() {
@@ -69,6 +79,13 @@ void Game::handleEvents() {
 void Game::update() {
   manager.refresh();
   manager.update();
+
+  if (Collision::AABB_detected(
+          player.getComponent<ColliderComponent>().collider,
+          wall.getComponent<ColliderComponent>().collider)) {
+    player.getComponent<TransformComponent>().scale = 1;
+    std::cout << "Player has collided with wall!" << endl;
+  }
 }
 
 void Game::render() {

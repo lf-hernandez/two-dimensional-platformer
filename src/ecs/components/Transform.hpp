@@ -7,6 +7,9 @@ class TransformComponent : public Component {
   Vector position;
   Vector velocity;
 
+  int height{32};
+  int width{32};
+  int scale{1};
   int speed{3};
 
   TransformComponent() {
@@ -14,9 +17,24 @@ class TransformComponent : public Component {
     position.y = 0.0f;
   }
 
-  TransformComponent(float x, float y) {
-    position.x = x;
-    position.y = y;
+  TransformComponent(float cstre_x, float cstre_y) {
+    position.x = cstre_x;
+    position.y = cstre_y;
+  }
+
+  TransformComponent(float cstre_x, float cstre_y, int cstr_scale) {
+    position.x = cstre_x;
+    position.y = cstre_y;
+    scale = cstr_scale;
+  }
+
+  TransformComponent(float cstr_x, float cstr_y, int cstr_height,
+                     int cstr_width, int cstr_scale) {
+    position.x = cstr_x;
+    position.y = cstr_y;
+    width = cstr_width;
+    height = cstr_height;
+    scale = cstr_scale;
   }
 
   void init() override {

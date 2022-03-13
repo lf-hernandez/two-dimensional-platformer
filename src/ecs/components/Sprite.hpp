@@ -14,6 +14,7 @@ class SpriteComponent : public Component {
  public:
   SpriteComponent() = default;
   SpriteComponent(const char* path) { setTexture(path); }
+  ~SpriteComponent() { SDL_DestroyTexture(texture); }
 
   void setTexture(const char* path) {
     texture = TextureManager::LoadTexture(path);
@@ -24,16 +25,17 @@ class SpriteComponent : public Component {
 
     srcRectangle.x = 0;
     srcRectangle.x = 0;
-    srcRectangle.h = 32;
-    srcRectangle.w = 32;
 
-    destRectange.w = 64;
-    destRectange.h = 64;
+    srcRectangle.h = transform->width;
+    srcRectangle.w = transform->height;
   }
 
   void update() override {
     destRectange.x = static_cast<int>(transform->position.x);
     destRectange.y = static_cast<int>(transform->position.y);
+
+    destRectange.w = transform->width * transform->scale;
+    destRectange.h = transform->height * transform->scale;
   }
 
   void draw() override {
