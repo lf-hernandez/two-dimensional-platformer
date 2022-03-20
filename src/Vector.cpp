@@ -58,7 +58,16 @@ Vector& Vector::operator*=(const Vector& vector) {
 Vector& Vector::operator/=(const Vector& vector) {
   return this->divide(vector);
 }
-
+Vector& Vector::operator*(const int& scale) {
+  this->x *= scale;
+  this->y *= scale;
+  return *this;
+}
+Vector& Vector::clear() {
+  this->y = 0.0f;
+  this->x = 0.0f;
+  return *this;
+}
 std::ostream& operator<<(std::ostream& stream, const Vector& vector) {
   stream << "Vector: (" << vector.x << ", " << vector.y << ")";
   return stream;

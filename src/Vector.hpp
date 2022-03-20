@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 
-using namespace std;
-
 class Vector {
  public:
   float x;
@@ -26,5 +24,8 @@ class Vector {
   Vector& operator*=(const Vector& vector);
   Vector& operator/=(const Vector& vector);
 
-  friend ostream& operator<<(ostream& stream, const Vector& vector);
+  Vector& operator*(const int& scale);
+  Vector& clear();
+
+  friend std::ostream& operator<<(std::ostream& stream, const Vector& vector);
 };

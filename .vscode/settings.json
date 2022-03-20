@@ -65,7 +65,12 @@
     "typeinfo": "cpp",
     "unordered_map": "cpp",
     "utility": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "*.tcc": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "deque": "cpp",
+    "ranges": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled"
 }

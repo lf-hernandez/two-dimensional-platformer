@@ -5,16 +5,14 @@
 #include "SDL2/SDL.h"
 #include "Transform.hpp"
 
-using namespace std;
-
 class ColliderComponent : public Component {
  public:
   SDL_Rect collider;
-  string tag;
+  std::string tag;
 
   TransformComponent* transform;
 
-  ColliderComponent(string cstr_tag) { tag = cstr_tag; }
+  ColliderComponent(std::string cstr_tag) { tag = cstr_tag; }
 
   void init() override {
     if (!entity->hasComponent<TransformComponent>()) {

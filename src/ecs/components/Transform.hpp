@@ -12,35 +12,29 @@ class TransformComponent : public Component {
   int scale{1};
   int speed{3};
 
-  TransformComponent() {
-    position.x = 0.0f;
-    position.y = 0.0f;
+  TransformComponent() { position.clear(); }
+
+  TransformComponent(float initial_x, float initial_y) {
+    position.x = initial_x;
+    position.y = initial_y;
   }
 
-  TransformComponent(float cstre_x, float cstre_y) {
-    position.x = cstre_x;
-    position.y = cstre_y;
+  TransformComponent(float initial_x, float initial_y, int initial_scale) {
+    position.x = initial_x;
+    position.y = initial_y;
+    scale = initial_scale;
   }
 
-  TransformComponent(float cstre_x, float cstre_y, int cstr_scale) {
-    position.x = cstre_x;
-    position.y = cstre_y;
-    scale = cstr_scale;
+  TransformComponent(float initial_x, float initial_y, int initial_height,
+                     int initial_width, int initial_scale) {
+    position.x = initial_x;
+    position.y = initial_y;
+    width = initial_width;
+    height = initial_height;
+    scale = initial_scale;
   }
 
-  TransformComponent(float cstr_x, float cstr_y, int cstr_height,
-                     int cstr_width, int cstr_scale) {
-    position.x = cstr_x;
-    position.y = cstr_y;
-    width = cstr_width;
-    height = cstr_height;
-    scale = cstr_scale;
-  }
-
-  void init() override {
-    velocity.x = 0;
-    velocity.y = 0;
-  }
+  void init() override { velocity.clear(); }
 
   void update() override {
     position.x += velocity.x * speed;
