@@ -5,4 +5,5 @@
 #include "components/Collision.hpp"
 #include "components/KeyboardController.hpp"
 #include "components/Sprite.hpp"
+#include "components/Tile.hpp"
 #include "components/Transform.hpp"

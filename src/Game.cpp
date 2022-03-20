@@ -13,8 +13,14 @@ Manager manager;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
+std::vector<ColliderComponent *> Game::colliders;
+
 auto &player(manager.addEntity());
 auto &wall(manager.addEntity());
+
+auto &tile0(manager.addEntity());
+auto &tile1(manager.addEntity());
+auto &tile2(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -43,6 +49,15 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height,
   isRunning = true;
 
   map = new Map();
+
+  tile0.addComponent<TileComponent>(300.0, 100.0, 32, 32, 0);
+  tile0.addComponent<ColliderComponent>("dirt");
+
+  tile1.addComponent<TileComponent>(400.0, 100, 32, 32, 1);
+  tile1.addComponent<ColliderComponent>("grass");
+
+  tile2.addComponent<TileComponent>(450.0, 550.0, 32, 32, 2);
+  tile2.addComponent<ColliderComponent>("sky");
 
   player.addComponent<TransformComponent>(0.0, 485.0, 2);
   player.addComponent<SpriteComponent>("assets/player.png");
@@ -80,20 +95,16 @@ void Game::update() {
   manager.refresh();
   manager.update();
 
-  if (Collision::AABB_detected(
-          player.getComponent<ColliderComponent>().collider,
-          wall.getComponent<ColliderComponent>().collider)) {
-    player.getComponent<TransformComponent>().scale = 1;
-    player.getComponent<TransformComponent>().velocity * -1;
-
-    std::cout << "Player has collided with wall!" << std::endl;
+  for (auto collider : colliders) {
+    Collision::AABB_detected(player.getComponent<ColliderComponent>(),
+                             *collider);
   }
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
 
-  map->DrawMap();
+  // map->DrawMap();
   manager.draw();
 
   SDL_RenderPresent(renderer);
