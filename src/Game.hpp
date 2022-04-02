@@ -19,6 +19,8 @@ class Game {
   void clean();
   bool getIsRunning();
 
+  static void addTile(int id, int xPos, int yPos);
+
   static SDL_Renderer *renderer;
   static SDL_Event event;
 

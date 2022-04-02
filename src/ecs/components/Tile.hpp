@@ -24,13 +24,13 @@ class TileComponent : public Component {
 
     switch (tileId) {
       case 0:
-        path = "assets/dirt.png";
+        path = "assets/sky.png";
         break;
       case 1:
         path = "assets/grass.png";
         break;
       case 2:
-        path = "assets/sky.png";
+        path = "assets/dirt.png";
         break;
       default:
         break;
